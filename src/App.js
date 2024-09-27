@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import UserCard from './components/UserCard';
 
-const USERS_PER_PAGE = 4;
+const USERS_PER_PAGE = 6;
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -45,17 +45,23 @@ function App() {
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className="bg-gray-300 text-gray-700 py-1 px-3 rounded"
+          className="bg-gray-300 text-gray-700 py-1 px-3 rounded-full"
         >
-          Previous
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M15 6l-6 6l6 6" />
+          </svg>
         </button>
-        <span>Page {currentPage} of {totalPages}</span>
+        {/* <span>Page {currentPage} of {totalPages}</span> */}
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className="bg-blue-500 text-white py-1 px-3 rounded"
+          className="bg-blue-500 text-white py-1 px-3 rounded-full"
         >
-          Next
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-right" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
         </button>
       </div>
     </div>
