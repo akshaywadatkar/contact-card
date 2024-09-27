@@ -8,10 +8,15 @@ function App() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [orArray, setOrArray] = useState([]);
+
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(data => setUsers(data));
+      .then(data => {
+        setUsers(data)
+        setOrArray(data)
+      });
   }, []);
 
   const totalPages = Math.ceil(users.length / USERS_PER_PAGE);
@@ -26,6 +31,14 @@ function App() {
       setCurrentPage(currentPage + 1);
     }
   };
+  const seachInArr = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    const filteredUsers = orArray.filter(user => {
+      return user.username.toLowerCase().includes(searchValue);
+    });
+    setUsers(filteredUsers);
+  }
+
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -36,6 +49,10 @@ function App() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">User Card Lists</h1>
+
+      <div class="w-full max-w-sm min-w-[200px] m-auto mb-4 flex justify-center">
+        <input onChange={seachInArr} className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Type username ..." />
+      </div>
       <div className="grid grid-cols-2 gap-4">
         {currentUsers.map(user => (
           <UserCard key={user.id} user={user} />
